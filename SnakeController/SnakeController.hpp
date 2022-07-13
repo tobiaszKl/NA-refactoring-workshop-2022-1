@@ -54,6 +54,7 @@ private:
     bool isLost(Segment const newHead);
     void checkPosition(Segment const newHead, bool &lost);
     void placeNewHead(Segment const newHead, bool &lost);
+    bool checkFoodCollision(Snake::FoodInd receivedFood);
 };
 
 } // namespace Snake

@@ -123,10 +123,18 @@ void Controller::placeNewHead(Segment const newHead, bool &lost){
     }
 }
 
+bool Controller::checkFoodCollision(Snake::FoodInd receivedFood){
+    for (auto const& segment : m_segments) {
+        if (segment.x == receivedFood.x and segment.y == receivedFood.y) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Controller::receive(std::unique_ptr<Event> e)
 {
     try {
-        //auto const& timerEvent = *dynamic_cast<EventT<TimeoutInd> const&>(*e);
         *dynamic_cast<EventT<TimeoutInd> const&>(*e);
 
         Segment const& currentHead = m_segments.front();
@@ -153,6 +161,7 @@ void Controller::receive(std::unique_ptr<Event> e)
                 auto receivedFood = *dynamic_cast<EventT<FoodInd> const&>(*e);
 
                 bool requestedFoodCollidedWithSnake = false;
+
                 for (auto const& segment : m_segments) {
                     if (segment.x == receivedFood.x and segment.y == receivedFood.y) {
                         requestedFoodCollidedWithSnake = true;
