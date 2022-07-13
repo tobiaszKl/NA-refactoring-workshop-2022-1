@@ -126,7 +126,8 @@ void Controller::placeNewHead(Segment const newHead, bool &lost){
 void Controller::receive(std::unique_ptr<Event> e)
 {
     try {
-        auto const& timerEvent = *dynamic_cast<EventT<TimeoutInd> const&>(*e);
+        //auto const& timerEvent = *dynamic_cast<EventT<TimeoutInd> const&>(*e);
+        *dynamic_cast<EventT<TimeoutInd> const&>(*e);
 
         Segment const& currentHead = m_segments.front();
 
